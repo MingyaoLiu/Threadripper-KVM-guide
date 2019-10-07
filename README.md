@@ -1,6 +1,6 @@
 # Threadripper-KVM-guide
 
-Read Wifi for all info.
+Read WIKI section for all info.
 
 Public editing enabled.
 
