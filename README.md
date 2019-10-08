@@ -24,4 +24,6 @@
 [6. Make sure everything is working fine.
 ](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/6.-Make-sure-everything-is-working-fine.)
 
-##Create [Issue](https://github.com/MingyaoLiu/Threadripper-KVM-guide/issues) if you have any questions.
+## Create [Issue](https://github.com/MingyaoLiu/Threadripper-KVM-guide/issues) if you have any questions.
+
+## Send me DM on [LTT](https://linustechtips.com/main/profile/41269-tensorvortex/) for direct assistance (when I'm online)
