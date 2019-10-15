@@ -13,43 +13,41 @@ or other application using the libvirt API.
       <libosinfo:os id="http://microsoft.com/win/10"/>
     </libosinfo:libosinfo>
   </metadata>
-  <memory unit='KiB'>16384000</memory>
-  <currentMemory unit='KiB'>16384000</currentMemory>
-  <memoryBacking>
-    <hugepages>
-      <page size='2048' unit='KiB'/>
-    </hugepages>
-  </memoryBacking>
-  <vcpu placement='static' cpuset='8-15,24-31'>16</vcpu>
-  <iothreads>2</iothreads>
+  <memory unit='KiB'>15360000</memory>
+  <currentMemory unit='KiB'>15360000</currentMemory>
+  <vcpu placement='static' cpuset='0-7,16-23'>16</vcpu>
+  <iothreads>4</iothreads>
   <cputune>
-    <vcpupin vcpu='0' cpuset='8'/>
-    <vcpupin vcpu='1' cpuset='24'/>
-    <vcpupin vcpu='2' cpuset='9'/>
-    <vcpupin vcpu='3' cpuset='25'/>
-    <vcpupin vcpu='4' cpuset='10'/>
-    <vcpupin vcpu='5' cpuset='26'/>
-    <vcpupin vcpu='6' cpuset='11'/>
-    <vcpupin vcpu='7' cpuset='27'/>
-    <vcpupin vcpu='8' cpuset='12'/>
-    <vcpupin vcpu='9' cpuset='28'/>
-    <vcpupin vcpu='10' cpuset='13'/>
-    <vcpupin vcpu='11' cpuset='29'/>
-    <vcpupin vcpu='12' cpuset='14'/>
-    <vcpupin vcpu='13' cpuset='30'/>
-    <vcpupin vcpu='14' cpuset='15'/>
-    <vcpupin vcpu='15' cpuset='31'/>
-    <emulatorpin cpuset='8-15,24-31'/>
-    <iothreadpin iothread='1' cpuset='6,22'/>
-    <iothreadpin iothread='2' cpuset='7,23'/>
+    <vcpupin vcpu='0' cpuset='0'/>
+    <vcpupin vcpu='1' cpuset='16'/>
+    <vcpupin vcpu='2' cpuset='1'/>
+    <vcpupin vcpu='3' cpuset='17'/>
+    <vcpupin vcpu='4' cpuset='2'/>
+    <vcpupin vcpu='5' cpuset='18'/>
+    <vcpupin vcpu='6' cpuset='3'/>
+    <vcpupin vcpu='7' cpuset='19'/>
+    <vcpupin vcpu='8' cpuset='4'/>
+    <vcpupin vcpu='9' cpuset='20'/>
+    <vcpupin vcpu='10' cpuset='5'/>
+    <vcpupin vcpu='11' cpuset='21'/>
+    <vcpupin vcpu='12' cpuset='6'/>
+    <vcpupin vcpu='13' cpuset='22'/>
+    <vcpupin vcpu='14' cpuset='7'/>
+    <vcpupin vcpu='15' cpuset='23'/>
+    <emulatorpin cpuset='0-7,16-23'/>
+    <iothreadpin iothread='1' cpuset='7,23'/>
+    <iothreadpin iothread='2' cpuset='6,22'/>
+    <iothreadpin iothread='3' cpuset='5,21'/>
+    <iothreadpin iothread='4' cpuset='4,20'/>
   </cputune>
   <numatune>
-    <memory mode='preferred' nodeset='1'/>
+    <memory mode='strict' nodeset='0'/>
   </numatune>
   <os>
     <type arch='x86_64' machine='pc-q35-3.1'>hvm</type>
     <loader readonly='yes' type='pflash'>/usr/share/OVMF/OVMF_CODE.fd</loader>
     <nvram>/var/lib/libvirt/qemu/nvram/win10_VARS.fd</nvram>
+    <boot dev='hd'/>
     <bootmenu enable='no'/>
   </os>
   <features>
@@ -61,20 +59,22 @@ or other application using the libvirt API.
       <spinlocks state='on' retries='8191'/>
       <vendor_id state='on' value='none'/>
     </hyperv>
-    <vmport state='off'/>
+    <kvm>
+      <hidden state='on'/>
+    </kvm>
   </features>
-  <cpu mode='host-passthrough' check='partial'>
+  <cpu mode='host-passthrough' check='full'>
     <topology sockets='1' cores='8' threads='2'/>
+    <cache level='3' mode='emulate'/>
     <feature policy='require' name='topoext'/>
-    <feature policy='disable' name='monitor'/>
-    <feature policy='require' name='x2apic'/>
-    <feature policy='require' name='hypervisor'/>
-    <feature policy='disable' name='svm'/>
+    <numa>
+      <cell id='0' cpus='0-15' memory='15360000' unit='KiB'/>
+    </numa>
   </cpu>
   <clock offset='localtime'>
-    <timer name='rtc' tickpolicy='catchup'/>
-    <timer name='pit' tickpolicy='delay'/>
-    <timer name='hpet' present='no'/>
+    <timer name='rtc' tickpolicy='delay'/>
+    <timer name='pit' tickpolicy='catchup'/>
+    <timer name='hpet' present='yes'/>
     <timer name='hypervclock' present='yes'/>
   </clock>
   <on_poweroff>destroy</on_poweroff>
@@ -87,11 +87,10 @@ or other application using the libvirt API.
   <devices>
     <emulator>/usr/bin/qemu-system-x86_64</emulator>
     <disk type='file' device='disk'>
-      <driver name='qemu' type='raw' cache='writeback'/>
-      <source file='/media/mingyao/MX300/win10.img'/>
-      <target dev='vda' bus='virtio'/>
-      <boot order='1'/>
-      <address type='pci' domain='0x0000' bus='0x03' slot='0x00' function='0x0'/>
+      <driver name='qemu' type='raw'/>
+      <source file='/media/mingyao/960pro/win10_KVM/win10.img'/>
+      <target dev='sda' bus='sata'/>
+      <address type='drive' controller='0' bus='0' target='0' unit='0'/>
     </disk>
     <controller type='usb' index='0' model='qemu-xhci' ports='15'>
       <address type='pci' domain='0x0000' bus='0x02' slot='0x00' function='0x0'/>
@@ -151,23 +150,23 @@ or other application using the libvirt API.
     <input type='keyboard' bus='ps2'/>
     <hostdev mode='subsystem' type='pci' managed='yes'>
       <source>
-        <address domain='0x0000' bus='0x11' slot='0x00' function='0x0'/>
+        <address domain='0x0000' bus='0x0b' slot='0x00' function='0x0'/>
       </source>
-      <rom bar='off'/>
+      <rom bar='on'/>
       <address type='pci' domain='0x0000' bus='0x08' slot='0x00' function='0x0' multifunction='on'/>
     </hostdev>
     <hostdev mode='subsystem' type='pci' managed='yes'>
       <source>
-        <address domain='0x0000' bus='0x11' slot='0x00' function='0x1'/>
+        <address domain='0x0000' bus='0x0b' slot='0x00' function='0x1'/>
       </source>
-      <rom bar='off'/>
+      <rom bar='on'/>
       <address type='pci' domain='0x0000' bus='0x08' slot='0x00' function='0x1'/>
     </hostdev>
     <hostdev mode='subsystem' type='pci' managed='yes'>
       <source>
-        <address domain='0x0000' bus='0x43' slot='0x00' function='0x0'/>
+        <address domain='0x0000' bus='0x08' slot='0x00' function='0x0'/>
       </source>
-      <address type='pci' domain='0x0000' bus='0x06' slot='0x00' function='0x0'/>
+      <address type='pci' domain='0x0000' bus='0x01' slot='0x00' function='0x0'/>
     </hostdev>
     <memballoon model='virtio'>
       <address type='pci' domain='0x0000' bus='0x04' slot='0x00' function='0x0'/>
