@@ -5,24 +5,22 @@
 
 [0. Information and Preparation](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/0.-Information-and-preparation)
 
-[1. Setup host system
-](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/1.-Setup-host-system)
+[1. Setup BIOS](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/1.-Set-up-BIOS)
 
-[2. Setup pre req software
-](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/2.-Setup-pre-req-software)
+[2. Setup Host System and Pre-req Software](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/2.-Setup-host-system-and-pre-req-software)
 
-[3. Test basic windows KVM
-](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/3.-Test-basic-windows-KVM)
+[3. Test basic windows KVM](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/3.-Test-basic-windows-KVM)
 
 [4. Improve on CPU and Memory performance
 ](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/4.-Improve-on-CPU-and-Memory-performance)
 
-[5. Setup GPU passthrough
-](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/5.-Setup-GPU-passthrough)
+[5. Setup GPU passthrough](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/5.-Setup-GPU-passthrough)
 
+[6. Enable other VFIO PCI pass-through devices](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/6.-Enable-other-VFIO-PCI-pass-through-devices)
 
-[6. Make sure everything is working fine.
-](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/6.-Make-sure-everything-is-working-fine.)
+[7. Benchmark and Review](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/7.-Benchmark-and-Review)
+
+[8. Conclusion](https://github.com/MingyaoLiu/Threadripper-KVM-guide/wiki/8.-Conclusion)
 
 ## Create [Issue](https://github.com/MingyaoLiu/Threadripper-KVM-guide/issues) if you have any questions.
 
